@@ -32,50 +32,42 @@
 *********************************************************************/
 
 
-#include "/u/dgossow/wsoculus/src/pr2_surrogate/src/head_pointer.h"
+#include "head_pointer.h"
 
-#include <pr2_controllers_msgs/PointHeadGoal.h>
-#include "tf/tf.h"
-
-HeadPointer::HeadPointer() :
-  point_head_action_client_("head_traj_controller/point_head_action", false)
+HeadPointer::HeadPointer( std::string action_topic ) :
+  point_head_action_client_(action_topic, true)
 {
-  // TODO Auto-generated constructor stub
-
+  hydra_sub_ = nh_.subscribe<razer_hydra::Hydra>( "hydra_calib", 1, boost::bind(&HeadPointer::hydraCb, this, _1) );
 }
 
 HeadPointer::~HeadPointer()
 {
-  // TODO Auto-generated destructor stub
 }
 
-bool HeadPointer::pointHeadAction(const geometry_msgs::PointStamped &target, std::string pointing_frame, bool wait_for_result)
+void HeadPointer::hydraCb( razer_hydra::HydraConstPtr hydra_msg )
 {
-  pr2_controllers_msgs::PointHeadGoal goal;
-  goal.target = target;
-  goal.pointing_axis.x = 0;
-  goal.pointing_axis.y = 0;
-  goal.pointing_axis.z = 1;
-  goal.pointing_frame = pointing_frame;
-  goal.min_duration = ros::Duration(0.05);
-  goal.max_velocity = 1.0;
+  ROS_INFO("timerCb");
 
-  point_head_action_client_.client().sendGoal(goal);
-
-  if(wait_for_result)
+  if ( hydra_msg->paddles.size() == 2 &&
+       hydra_msg->paddles[0].buttons.size() == 7 &&
+       hydra_msg->paddles[0].buttons[0] )
   {
-    point_head_action_client_.client().waitForResult( ros::Duration(3.0) );
+    pr2_controllers_msgs::PointHeadGoal point_head_goal;
 
-    if (point_head_action_client_.client().getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
-    {
-      ROS_DEBUG_NAMED("manipulation","Successfully moved head.");
-      return true;
-    }
-    else
-    {
-      ROS_ERROR("Head movement failed or timed out.");
-      return false;
-    }
+    point_head_goal.pointing_axis.x = 1;
+    point_head_goal.pointing_axis.y = 0;
+    point_head_goal.pointing_axis.z = 0;
+
+    point_head_goal.target.point.x = 5;
+    point_head_goal.target.point.y = 0;
+    point_head_goal.target.point.z = 0;
+    point_head_goal.target.header.frame_id = "oculus";
+    point_head_goal.target.header.stamp = ros::Time(0);
+
+    point_head_goal.pointing_frame = "head_mount_kinect_rgb_link";
+
+    point_head_goal.max_velocity = 1.0;
+
+    point_head_action_client_.sendGoal( point_head_goal );
   }
-  return true;
 }

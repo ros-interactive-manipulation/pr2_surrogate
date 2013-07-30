@@ -34,24 +34,29 @@
 #ifndef HEAD_POINTER_H_
 #define HEAD_POINTER_H_
 
-#include "action_wrapper.h"
+#include <ros/ros.h>
 
-#include <geometry_msgs/PointStamped.h>
 #include <pr2_controllers_msgs/PointHeadAction.h>
-#include <string>
+
+#include <actionlib/client/simple_action_client.h>
+
+#include <razer_hydra/Hydra.h>
 
 class HeadPointer
 {
 public:
-  HeadPointer();
+  HeadPointer( std::string action_topic );
   virtual ~HeadPointer();
 
-  bool pointHeadAction(const geometry_msgs::PointStamped &target, std::string pointing_frame, bool wait_for_result);
+  void hydraCb( razer_hydra::HydraConstPtr hydra_msg );
 
-protected:
-  ActionWrapper<pr2_controllers_msgs::PointHeadAction> point_head_action_client_;
+  typedef actionlib::SimpleActionClient<pr2_controllers_msgs::PointHeadAction> PointHeadActionClient;
+  PointHeadActionClient point_head_action_client_;
+
+  ros::NodeHandle nh_;
+
+  ros::Subscriber hydra_sub_;
 };
-
 
 
 #endif /* HEAD_POINTER_H_ */
