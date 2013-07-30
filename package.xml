@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package>
+  <name>pr2_surrogate</name>
+  <version>0.0.0</version>
+  <description>The pr2_surrogate package allows you to make a PR2
+               into a surrogate for your physical body using the Oculus RIFT HMD
+               and Razer Hydra controller.</description>
+
+  <maintainer email="dgossow@willowgarage.com">David Gossow</maintainer>
+
+  <license>BSD</license>
+
+  <!-- <url type="website">http://ros.org/wiki/pr2_surrogate</url> -->
+
+  <author email="dgossow@willowgarage.com">David Gossow</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>pr2_controllers_msgs</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>roscpp</build_depend>
+
+</package>
