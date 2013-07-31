@@ -20,17 +20,17 @@ catkin_package(
 
 include_directories(${catkin_INCLUDE_DIRS})
 
-add_executable(pr2_surrogate
-  src/teleop_node.cpp
+add_executable(head_pointer
+  src/head_pointer_node.cpp
   src/head_pointer.cpp
   )
 
-target_link_libraries(pr2_surrogate
+target_link_libraries(head_pointer
    ${catkin_LIBRARIES}
    ${Boost_LIBRARIES}
 )
 
-install(TARGETS pr2_surrogate
+install(TARGETS head_pointer
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

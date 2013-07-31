@@ -1,0 +1,30 @@
+<launch>
+
+  <arg name="period" default="0.02" />
+  <arg name="start_hydra" default="true" />
+  <arg name="device" default="hydra" />
+  <arg name="radius" default="2.0" />
+
+  <include if="$(arg start_hydra)" file="$(find razer_hydra)/hydra.launch" >
+    <arg name="tf" value="true" />
+  </include>
+
+  <node name="interaction_cursor_demo_node" pkg="interaction_cursor_demo" type="user_test" output="screen" >
+    <param name="period" type="double" value="$(arg period)" />
+    <param name="device" type="string" value="$(arg device)" />
+    <param name="hydra_workspace_radius" type="double" value="$(arg radius)" />
+  </node>
+
+  <arg name="command_args" value="-d $(find pr2_surrogate)/config/interaction_cursor.rviz" />
+  
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" required="true" 
+        respawn="false" output="screen" args="$(arg command_args)">
+  </node>
+  
+  <node name="head_pointer" pkg="pr2_surrogate" type="head_pointer" required="true" output="screen">
+    <param name="tracked_frame" value="oculus"/>
+    <param name="pointing_frame" value="head_mount_kinect_rgb_link"/>
+    <param name="update_freq" value="0.05"/>
+  </node>
+
+</launch>

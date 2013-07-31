@@ -34,10 +34,25 @@
 
 #include "head_pointer.h"
 
-HeadPointer::HeadPointer( std::string action_topic ) :
+HeadPointer::HeadPointer( ros::NodeHandle pnh, std::string action_topic ) :
   point_head_action_client_(action_topic, true)
 {
   hydra_sub_ = nh_.subscribe<razer_hydra::Hydra>( "hydra_calib", 1, boost::bind(&HeadPointer::hydraCb, this, _1) );
+
+  pnh.param<std::string>( "tracked_frame", point_head_goal_.target.header.frame_id, "oculus" );
+  pnh.param<std::string>( "pointing_frame", point_head_goal_.pointing_frame, "head_mount_kinect_rgb_link" );
+
+  point_head_goal_.pointing_axis.x = 1;
+  point_head_goal_.pointing_axis.y = 0;
+  point_head_goal_.pointing_axis.z = 0;
+
+  point_head_goal_.target.point.x = 2;
+  point_head_goal_.target.point.y = 0;
+  point_head_goal_.target.point.z = 0;
+
+  point_head_goal_.max_velocity = 1.0;
+
+  pnh.param<double>( "update_freq", update_freq_, 0.1 );
 }
 
 HeadPointer::~HeadPointer()
@@ -46,28 +61,18 @@ HeadPointer::~HeadPointer()
 
 void HeadPointer::hydraCb( razer_hydra::HydraConstPtr hydra_msg )
 {
-  ROS_INFO("timerCb");
+  //ROS_INFO("timerCb");
+
+  if ( ros::Time::now() - last_update_time_ < ros::Duration(update_freq_) )
+  {
+    return;
+  }
 
   if ( hydra_msg->paddles.size() == 2 &&
        hydra_msg->paddles[0].buttons.size() == 7 &&
-       hydra_msg->paddles[0].buttons[0] )
+       hydra_msg->paddles[0].buttons[5] )
   {
-    pr2_controllers_msgs::PointHeadGoal point_head_goal;
-
-    point_head_goal.pointing_axis.x = 1;
-    point_head_goal.pointing_axis.y = 0;
-    point_head_goal.pointing_axis.z = 0;
-
-    point_head_goal.target.point.x = 5;
-    point_head_goal.target.point.y = 0;
-    point_head_goal.target.point.z = 0;
-    point_head_goal.target.header.frame_id = "oculus";
-    point_head_goal.target.header.stamp = ros::Time(0);
-
-    point_head_goal.pointing_frame = "head_mount_kinect_rgb_link";
-
-    point_head_goal.max_velocity = 1.0;
-
-    point_head_action_client_.sendGoal( point_head_goal );
+    last_update_time_ = ros::Time::now();
+    point_head_action_client_.sendGoal( point_head_goal_ );
   }
 }

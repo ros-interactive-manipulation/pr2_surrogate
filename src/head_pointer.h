@@ -45,7 +45,7 @@
 class HeadPointer
 {
 public:
-  HeadPointer( std::string action_topic );
+  HeadPointer( ros::NodeHandle pnh, std::string action_topic );
   virtual ~HeadPointer();
 
   void hydraCb( razer_hydra::HydraConstPtr hydra_msg );
@@ -53,9 +53,13 @@ public:
   typedef actionlib::SimpleActionClient<pr2_controllers_msgs::PointHeadAction> PointHeadActionClient;
   PointHeadActionClient point_head_action_client_;
 
+  ros::Time last_update_time_;
   ros::NodeHandle nh_;
-
   ros::Subscriber hydra_sub_;
+
+  pr2_controllers_msgs::PointHeadGoal point_head_goal_;
+
+  double update_freq_;
 };
 
 
