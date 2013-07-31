@@ -40,7 +40,7 @@ using std::string;
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "pr2_surrogate");
+    ros::init(argc, argv, "head_pointer");
     ros::NodeHandle nh, pnh("~");
 
     HeadPointer hp( pnh, "head_traj_controller/point_head_action" );

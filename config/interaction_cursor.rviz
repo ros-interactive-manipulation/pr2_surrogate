@@ -10,7 +10,6 @@ Panels:
         - /DepthCloud1/Auto Size1
         - /DepthCloud1/Occlusion Compensation1
         - /InteractiveMarkers1
-        - /InteractiveMarkers2
       Splitter Ratio: 0.503563
     Tree Height: 866
   - Class: rviz/Selection
@@ -138,7 +137,7 @@ Visualization Manager:
       Queue Size: 5
       Selectable: true
       Size (Pixels): 3
-      Style: Flat Squares
+      Style: Points
       Topic Filter: true
       Use Fixed Frame: true
       Use rainbow: true
@@ -176,15 +175,6 @@ Visualization Manager:
       Show Visual Aids: false
       Update Topic: /pr2_marker_control/update
       Value: true
-    - Class: rviz/InteractiveMarkers
-      Enable Transparency: false
-      Enabled: false
-      Name: InteractiveMarkers
-      Show Axes: false
-      Show Descriptions: true
-      Show Visual Aids: false
-      Update Topic: /pr2_marker_control_transparent/update
-      Value: false
   Enabled: true
   Global Options:
     Background Color: 77; 77; 77
@@ -216,10 +206,10 @@ Visualization Manager:
         Z: 0.700765
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.394796
+      Pitch: 0.514796
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 3.37864
+      Yaw: 4.07364
     Saved:
       - Class: rviz/Orbit
         Distance: 0.01
@@ -273,5 +263,5 @@ Window Geometry:
   Views:
     collapsed: false
   Width: 1716
-  X: 564
-  Y: 271
+  X: 727
+  Y: 274

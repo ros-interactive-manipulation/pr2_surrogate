@@ -30,6 +30,10 @@ target_link_libraries(head_pointer
    ${Boost_LIBRARIES}
 )
 
+add_dependencies(head_pointer
+  razer_hydra_generate_messages_cpp
+)
+
 install(TARGETS head_pointer
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}

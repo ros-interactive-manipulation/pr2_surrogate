@@ -41,6 +41,8 @@ HeadPointer::HeadPointer( ros::NodeHandle pnh, std::string action_topic ) :
 
   pnh.param<std::string>( "tracked_frame", point_head_goal_.target.header.frame_id, "oculus" );
   pnh.param<std::string>( "pointing_frame", point_head_goal_.pointing_frame, "head_mount_kinect_rgb_link" );
+  pnh.param<int>( "deadman_paddle", deadman_paddle_, 0 );
+  pnh.param<int>( "deadman_button", deadman_button_, 0 );
 
   point_head_goal_.pointing_axis.x = 1;
   point_head_goal_.pointing_axis.y = 0;
@@ -61,18 +63,22 @@ HeadPointer::~HeadPointer()
 
 void HeadPointer::hydraCb( razer_hydra::HydraConstPtr hydra_msg )
 {
-  //ROS_INFO("timerCb");
-
   if ( ros::Time::now() - last_update_time_ < ros::Duration(update_freq_) )
   {
     return;
   }
 
-  if ( hydra_msg->paddles.size() == 2 &&
-       hydra_msg->paddles[0].buttons.size() == 7 &&
-       hydra_msg->paddles[0].buttons[5] )
+  if ( hydra_msg->paddles.size() <= deadman_paddle_ &&
+       hydra_msg->paddles.at(deadman_paddle_).buttons.size() <= deadman_button_  )
+  {
+    ROS_ERROR_ONCE("Paddle/Button index for deadman switch is out of bounds!");
+    return;
+  }
+
+  if ( hydra_msg->paddles.at(deadman_paddle_).buttons.at(deadman_button_) )
   {
     last_update_time_ = ros::Time::now();
+    //point_head_goal_.target.header.stamp = ros::Time::now() - ros::Duration(1.0);
     point_head_action_client_.sendGoal( point_head_goal_ );
   }
 }

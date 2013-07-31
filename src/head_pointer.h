@@ -60,6 +60,9 @@ public:
   pr2_controllers_msgs::PointHeadGoal point_head_goal_;
 
   double update_freq_;
+
+  int deadman_paddle_;
+  int deadman_button_;
 };
 
 
