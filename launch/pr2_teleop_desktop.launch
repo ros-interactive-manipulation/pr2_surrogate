@@ -5,7 +5,9 @@
   <arg name="device" default="hydra" />
   <arg name="radius" default="2.0" />
   
-  <include if="$(arg start_hydra)" file="$(find razer_hydra)/launch/hydra.launch" />
+  <include if="$(arg start_hydra)" file="$(find razer_hydra)/launch/hydra.launch">
+    <arg name="publish_tf" value="true"/>
+  </include>
 
   <arg name="command_args" value="-d $(find pr2_surrogate)/config/pr2_teleop.rviz" />
   
@@ -23,5 +25,4 @@
     <remap from="audio" to="pr2_audio"/>
   </node>
 
-  
 </launch>

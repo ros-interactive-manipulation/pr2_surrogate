@@ -6,6 +6,17 @@
 
   <include file="$(find pr2_surrogate)/launch/head_pointer.launch"/>
 
+  <include file="$(find pr2_surrogate)/launch/cart_controllers.launch"/>
+
+  <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
+    <arg name="command_topic" value="l_arm_cart_controller/command"/>
+    <arg name="tracked_frame" value="hydra_left_pivot"/>
+  </include>
+
+  <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
+    <arg name="command_topic" value="r_arm_cart_controller/command"/>
+    <arg name="tracked_frame" value="hydra_right_pivot"/>
+  </include>
 
   <node name="pr2_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
     <param name="bitrate" value="40"/>
@@ -17,4 +28,7 @@
     <remap from="audio" to="desktop_audio"/>
   </node>
 
+  <node pkg="tf" type="static_transform_publisher" name="hydra_to_base_link_pub" 
+        args="0.5 0 1.0 0 0 0 1 base_link hydra_base 15"/>
+ 
 </launch>

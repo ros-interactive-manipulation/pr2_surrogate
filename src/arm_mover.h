@@ -31,21 +31,35 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include "head_pointer.h"
+#ifndef ARM_MOVER_H_
+#define ARM_MOVER_H_
 
-#include <string>
 #include <ros/ros.h>
 
-using std::string;
+#include <razer_hydra/Hydra.h>
 
-int main(int argc, char **argv)
+#include <geometry_msgs/PoseStamped.h>
+
+class ArmMover
 {
-    ros::init(argc, argv, "head_pointer");
-    ros::NodeHandle nh, pnh("~");
+public:
+  ArmMover( ros::NodeHandle pnh );
+  virtual ~ArmMover();
 
-    HeadPointer head_pointer( pnh, "head_traj_controller/point_head_action" );
+  void hydraCb( razer_hydra::HydraConstPtr hydra_msg );
 
-    ros::spin();
-    return 0;
-}
+  ros::Time last_update_time_;
+  ros::NodeHandle nh_;
+  ros::Subscriber hydra_sub_;
 
+  ros::Publisher command_pub_;
+  geometry_msgs::PoseStamped pose_msg_;
+
+  double update_freq_;
+
+  int deadman_paddle_;
+  int deadman_button_;
+};
+
+
+#endif /* ARM_MOVER_H_ */

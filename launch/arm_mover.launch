@@ -1,0 +1,14 @@
+<launch>
+
+  <arg name="command_topic"/>
+  <arg name="tracked_frame"/>
+
+  <node name="arm_mover_$(arg tracked_frame)" pkg="pr2_surrogate" type="arm_mover" required="true" output="screen">
+    <param name="tracked_frame" value="$(arg tracked_frame)"/>
+    <param name="update_freq" value="0.1"/>
+    <param name="deadman_paddle" value="0"/>
+    <param name="deadman_button" value="0"/>
+    <remap from="command" to="$(arg command_topic)"/>
+  </node>
+
+</launch>

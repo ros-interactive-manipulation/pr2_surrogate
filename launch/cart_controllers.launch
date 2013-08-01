@@ -1,0 +1,40 @@
+<launch>
+  <rosparam ns="r_arm_cart_controller">
+    type: robot_mechanism_controllers/CartesianPoseController
+    root_name: torso_lift_link
+    tip_name: r_wrist_roll_link
+    fb_trans:
+      p: 100.0
+      i: 1.0
+      d: 0.0
+      i_clamp: 2.0
+    fb_rot:
+      p: 5.0
+      i: 0.1
+      d: 0.0
+      i_clamp: 0.4
+  </rosparam>
+  <rosparam ns="l_arm_cart_controller">
+    type: robot_mechanism_controllers/CartesianPoseController
+    root_name: torso_lift_link
+    tip_name: l_wrist_roll_link
+    fb_trans:
+      p: 100.0
+      i: 1.0
+      d: 0.0
+      i_clamp: 2.0
+    fb_rot:
+      p: 5.0
+      i: 0.1
+      d: 0.0
+      i_clamp: 0.4
+  </rosparam>
+
+  <node name="spawn_l_cart"
+       pkg="pr2_controller_manager" type="pr2_controller_manager"
+       args="spawn l_arm_cart_controller" />
+  <node name="spawn_r_cart"
+       pkg="pr2_controller_manager" type="pr2_controller_manager"
+       args="spawn r_arm_cart_controller" />
+       
+</launch>

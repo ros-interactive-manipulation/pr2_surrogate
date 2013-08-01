@@ -24,17 +24,27 @@ add_executable(head_pointer
   src/head_pointer_node.cpp
   src/head_pointer.cpp
   )
-
 target_link_libraries(head_pointer
    ${catkin_LIBRARIES}
    ${Boost_LIBRARIES}
 )
-
 add_dependencies(head_pointer
   razer_hydra_generate_messages_cpp
 )
 
-install(TARGETS head_pointer
+add_executable(arm_mover
+  src/arm_mover_node.cpp
+  src/arm_mover.cpp
+  )
+target_link_libraries(arm_mover
+   ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
+)
+add_dependencies(arm_mover
+  razer_hydra_generate_messages_cpp
+)
+
+install(TARGETS head_pointer arm_mover
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
