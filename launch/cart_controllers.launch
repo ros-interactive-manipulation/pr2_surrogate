@@ -30,11 +30,18 @@
       i_clamp: 0.4
   </rosparam>
 
+  <node name="stop_l"
+       pkg="pr2_controller_manager" type="pr2_controller_manager"
+       args="stop l_arm_controller" />
+  <node name="stop_r"
+       pkg="pr2_controller_manager" type="pr2_controller_manager"
+       args="stop r_arm_controller" />
+       
   <node name="spawn_l_cart"
        pkg="pr2_controller_manager" type="pr2_controller_manager"
        args="spawn l_arm_cart_controller" />
   <node name="spawn_r_cart"
        pkg="pr2_controller_manager" type="pr2_controller_manager"
        args="spawn r_arm_cart_controller" />
-       
+
 </launch>

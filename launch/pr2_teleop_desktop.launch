@@ -25,4 +25,7 @@
     <remap from="audio" to="pr2_audio"/>
   </node>
 
+  <node pkg="tf" type="static_transform_publisher" name="hydra_to_base_link_pub" 
+        args="0.75 0 1.0 0 0 0 1 base_link hydra_base 15"/>
+ 
 </launch>
