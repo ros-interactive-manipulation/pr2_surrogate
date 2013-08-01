@@ -6,4 +6,15 @@
 
   <include file="$(find pr2_surrogate)/launch/head_pointer.launch"/>
 
+
+  <node name="pr2_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
+    <param name="bitrate" value="40"/>
+    <remap from="audio" to="pr2_audio"/>
+  </node>
+
+  <node name="desktop_audio_play" pkg="audio_play" type="audio_play" output="screen">
+    <param name="dst" value="alsasink"/>
+    <remap from="audio" to="desktop_audio"/>
+  </node>
+
 </launch>
