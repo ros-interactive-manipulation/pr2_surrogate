@@ -13,11 +13,15 @@
   <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
     <arg name="command_topic" value="l_arm_cart_controller/command"/>
     <arg name="tracked_frame" value="hydra_left_pivot"/>
+    <arg name="deadman_paddle" default="0"/>
+    <arg name="deadman_button" default="5"/>
   </include>
 
   <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
     <arg name="command_topic" value="r_arm_cart_controller/command"/>
     <arg name="tracked_frame" value="hydra_right_pivot"/>
+    <arg name="deadman_paddle" default="1"/>
+    <arg name="deadman_button" default="5"/>
   </include>
 
   <node name="pr2_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
