@@ -72,6 +72,7 @@ void ArmMover::hydraCb( razer_hydra::HydraConstPtr hydra_msg )
   {
     last_update_time_ = ros::Time::now();
     pose_msg_.header.stamp = ros::Time::now();
+    pose_msg_.pose.orientation.w = 1;
     command_pub_.publish( pose_msg_ );
   }
 }
