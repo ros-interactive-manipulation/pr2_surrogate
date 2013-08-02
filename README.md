@@ -1,4 +1,4 @@
-pr2_surrogate
+PR2 Surrogate
 =============
 
 This package enables fully immersive control of a PR2 robot using the Oculus Rift and Razer Hydra.
