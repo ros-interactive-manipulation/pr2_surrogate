@@ -8,6 +8,8 @@
 
   <include file="$(find pr2_surrogate)/launch/cart_controllers.launch"/>
 
+  <include file="$(find pr2_surrogate)/launch/openni_head.launch"/>
+
   <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
     <arg name="command_topic" value="l_arm_cart_controller/command"/>
     <arg name="tracked_frame" value="hydra_left_pivot"/>

@@ -33,7 +33,7 @@
     <param name="rgb_frame_id"   value="$(arg rgb_frame_id)" />
     <param name="depth_frame_id" value="$(arg depth_frame_id)" />
     <param name="depth_registration" value="$(arg depth_registration)" />
-    <param name="data_skip" value="5" />
+    <param name="data_skip" value="4" />
 
     <remap from="ir" to="$(arg ir)" />
     <remap from="rgb" to="$(arg rgb)" />
