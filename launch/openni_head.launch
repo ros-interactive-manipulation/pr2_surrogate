@@ -54,7 +54,7 @@
 
     <!-- Load driver -->
     <include if="$(arg load_driver)"
-	     file="device.launch">
+	     file="$(find pr2_surrogate)/launch/device.launch">
       <!-- Could really use some syntactic sugar for this -->
       <arg name="manager"               value="/$(arg manager)" /> <!-- Fully resolved -->
       <arg name="device_id"             value="$(arg device_id)" />
