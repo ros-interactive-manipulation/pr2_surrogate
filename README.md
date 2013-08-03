@@ -13,3 +13,8 @@ Installation:
 - Clone this repo and [rviz_oculus](https://github.com/ros-visualization/rviz_oculus) into a catkin
 - `sudo apt-get install ros-groovy-razer-hydra`
 - call `catkin_make`
+
+How to run:
+- Connect your Hydra and Oculus Rift
+- on the robot: `robot start`, then `roslaunch pr2_surrogate pr2_teleop_robot.launch`
+- on the desktop: `roslaunch pr2_surrogate pr2_teleop_desktop.launch`
