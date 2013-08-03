@@ -16,5 +16,5 @@ Installation:
 
 How to run:
 - Connect your Hydra and Oculus Rift
-- on the robot: `robot start`, then `roslaunch pr2_surrogate pr2_teleop_robot.launch`
-- on the desktop: `roslaunch pr2_surrogate pr2_teleop_desktop.launch`
+- On the robot: `robot start`, then `roslaunch pr2_surrogate pr2_teleop_robot.launch`
+- On the desktop: `roslaunch pr2_surrogate pr2_teleop_desktop.launch`
