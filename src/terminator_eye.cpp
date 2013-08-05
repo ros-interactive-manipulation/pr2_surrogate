@@ -31,21 +31,44 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include "arm_mover.h"
 
-#include <string>
-#include <ros/ros.h>
+#include "terminator_eye.h"
 
-using std::string;
+#include <geometry_msgs/PoseStamped.h>
 
-int main(int argc, char **argv)
+TerminatorEye::TerminatorEye( ros::NodeHandle pnh ) :
+  projector_on_(false)
 {
-    ros::init(argc, argv, "arm_mover");
-    ros::NodeHandle nh, pnh("~");
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>( "joy", 1, boost::bind(&TerminatorEye::joyCb, this, _1) );
 
-    ArmMover arm_mover( pnh );
+  pnh.param<int>( "trigger_button", trigger_button_, 11 );
 
-    ros::spin();
-    return 0;
+  ROS_INFO_STREAM("Activate terminator with joystick button " << trigger_button_);
 }
 
+TerminatorEye::~TerminatorEye()
+{
+}
+
+void TerminatorEye::joyCb( sensor_msgs::JoyConstPtr joy_msg )
+{
+  if ( trigger_button_ >= joy_msg->buttons.size() )
+  {
+    ROS_ERROR_ONCE("Button index for deadman switch is out of bounds!");
+    return;
+  }
+
+  bool deadman_pressed = joy_msg->buttons.at(trigger_button_);
+
+  if ( deadman_pressed != projector_on_ )
+  {
+    projector_on_ = deadman_pressed;
+    std::string projector_mode = projector_on_ ? "3" : "2";
+    // no dynamic_reconfigure c++ api, so we need to run a system command. :(
+    std::string dynparam_str =
+        "rosrun dynamic_reconfigure dynparam set camera_synchronizer_node projector_mode "
+        + projector_mode;
+    system(dynparam_str.c_str());
+  }
+
+}

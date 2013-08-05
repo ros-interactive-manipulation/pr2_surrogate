@@ -44,7 +44,19 @@ add_dependencies(arm_mover
   razer_hydra_generate_messages_cpp
 )
 
-install(TARGETS head_pointer arm_mover
+add_executable(terminator_eye
+  src/terminator_eye_node.cpp
+  src/terminator_eye.cpp
+  )
+target_link_libraries(terminator_eye
+   ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
+)
+add_dependencies(terminator_eye
+  sensor_msgs_generate_messages_cpp
+)
+
+install(TARGETS head_pointer arm_mover terminator_eye
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}

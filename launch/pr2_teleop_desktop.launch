@@ -27,6 +27,6 @@
   </node>
 
   <node pkg="tf" type="static_transform_publisher" name="hydra_to_base_link_pub" 
-        args="0.75 0 0.7 0 0 0 1 base_link hydra_base 30"/>
+        args="1.2 0 0.7 0 0 0 1 base_link hydra_base 30"/>
  
 </launch>

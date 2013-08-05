@@ -9,6 +9,8 @@
   <!-- <include file="$(find pr2_surrogate)/launch/cart_controllers.launch"/> -->
   <include file="$(find pr2_surrogate)/launch/c_jt.launch"/>
 
+  <include file="$(find pr2_surrogate)/launch/terminator_eye.launch"/>
+
   <include file="$(find pr2_surrogate)/launch/openni_head.launch"/>
 
   <include file="$(find pr2_surrogate)/launch/arm_mover.launch">

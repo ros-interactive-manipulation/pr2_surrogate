@@ -31,21 +31,28 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include "arm_mover.h"
+#ifndef ARM_MOVER_H_
+#define ARM_MOVER_H_
 
-#include <string>
 #include <ros/ros.h>
 
-using std::string;
+#include <sensor_msgs/Joy.h>
 
-int main(int argc, char **argv)
+class TerminatorEye
 {
-    ros::init(argc, argv, "arm_mover");
-    ros::NodeHandle nh, pnh("~");
+public:
+  TerminatorEye( ros::NodeHandle pnh );
+  virtual ~TerminatorEye();
 
-    ArmMover arm_mover( pnh );
+  void joyCb( sensor_msgs::JoyConstPtr joy_msg );
 
-    ros::spin();
-    return 0;
-}
+  ros::NodeHandle nh_;
+  ros::Subscriber joy_sub_;
 
+  bool projector_on_;
+
+  int trigger_button_;
+};
+
+
+#endif /* ARM_MOVER_H_ */

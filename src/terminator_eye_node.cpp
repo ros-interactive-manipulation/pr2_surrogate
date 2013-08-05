@@ -31,7 +31,7 @@
 *  POSSIBILITY OF SUCH DAMAGE.
 *********************************************************************/
 
-#include "arm_mover.h"
+#include "terminator_eye.h"
 
 #include <string>
 #include <ros/ros.h>
@@ -40,10 +40,10 @@ using std::string;
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "arm_mover");
+    ros::init(argc, argv, "terminator_eye");
     ros::NodeHandle nh, pnh("~");
 
-    ArmMover arm_mover( pnh );
+    TerminatorEye terminator_eye( pnh );
 
     ros::spin();
     return 0;
