@@ -9,7 +9,6 @@
     <param name="update_freq" value="0.1"/>
     <param name="deadman_button" value="$(arg deadman_button)"/>
     <remap from="command" to="$(arg command_topic)"/>
-    <remap from="joy" to="hydra_joy"/>
   </node>
 
 </launch>

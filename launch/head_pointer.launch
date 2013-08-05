@@ -8,7 +8,6 @@
     <param name="pointing_frame" value="head_mount_kinect_rgb_link"/>
     <param name="update_freq" value="0.1"/>
     <param name="deadman_button" value="$(arg deadman_button)"/>
-    <remap from="joy" to="hydra_joy"/>
   </node>
 
 </launch>
