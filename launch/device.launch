@@ -36,6 +36,7 @@
     <param name="data_skip" value="3" />
     <param name="depth_mode" value="5" />
     <param name="image_mode" value="5" />
+    <param name="depth_time_offset" value="-0.03" />
 
     <remap from="ir" to="$(arg ir)" />
     <remap from="rgb" to="$(arg rgb)" />
