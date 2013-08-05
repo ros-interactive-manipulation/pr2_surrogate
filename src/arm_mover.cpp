@@ -38,13 +38,12 @@
 
 ArmMover::ArmMover( ros::NodeHandle pnh )
 {
-  hydra_sub_ = nh_.subscribe<razer_hydra::Hydra>( "hydra_calib", 1, boost::bind(&ArmMover::hydraCb, this, _1) );
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>( "joy", 1, boost::bind(&ArmMover::joyCb, this, _1) );
 
   command_pub_ = nh_.advertise<geometry_msgs::PoseStamped>( "command", 1 );
 
   pnh.param<std::string>( "tracked_frame", pose_msg_.header.frame_id, "" );
 
-  pnh.param<int>( "deadman_paddle", deadman_paddle_, 0 );
   pnh.param<int>( "deadman_button", deadman_button_, 0 );
 
   pnh.param<double>( "update_freq", update_freq_, 0.1 );
@@ -54,21 +53,20 @@ ArmMover::~ArmMover()
 {
 }
 
-void ArmMover::hydraCb( razer_hydra::HydraConstPtr hydra_msg )
+void ArmMover::joyCb( sensor_msgs::JoyConstPtr joy_msg )
 {
   if ( ros::Time::now() - last_update_time_ < ros::Duration(update_freq_) )
   {
     return;
   }
 
-  if ( hydra_msg->paddles.size() <= deadman_paddle_ &&
-       hydra_msg->paddles.at(deadman_paddle_).buttons.size() <= deadman_button_  )
+  if ( joy_msg->buttons.size() <= deadman_button_  )
   {
-    ROS_ERROR_ONCE("Paddle/Button index for deadman switch is out of bounds!");
+    ROS_ERROR_ONCE("Button index for deadman switch is out of bounds!");
     return;
   }
 
-  if ( hydra_msg->paddles.at(deadman_paddle_).buttons.at(deadman_button_) )
+  if ( joy_msg->buttons.at(deadman_button_) )
   {
     last_update_time_ = ros::Time::now();
     pose_msg_.header.stamp = ros::Time::now();

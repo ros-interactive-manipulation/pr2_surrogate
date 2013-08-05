@@ -2,6 +2,7 @@
 
   <node name="terminator_eye" pkg="pr2_surrogate" type="terminator_eye" required="true" output="screen">
     <param name="trigger_button" value="11"/>
+    <remap from="joy" to="hydra_joy"/>
   </node>
 
 </launch>

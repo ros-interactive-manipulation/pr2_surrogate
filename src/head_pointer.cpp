@@ -37,11 +37,10 @@
 HeadPointer::HeadPointer( ros::NodeHandle pnh, std::string action_topic ) :
   point_head_action_client_(action_topic, true)
 {
-  hydra_sub_ = nh_.subscribe<razer_hydra::Hydra>( "hydra_calib", 1, boost::bind(&HeadPointer::hydraCb, this, _1) );
+  joy_sub_ = nh_.subscribe<sensor_msgs::Joy>( "joy", 1, boost::bind(&HeadPointer::joyCb, this, _1) );
 
   pnh.param<std::string>( "tracked_frame", point_head_goal_.target.header.frame_id, "oculus" );
   pnh.param<std::string>( "pointing_frame", point_head_goal_.pointing_frame, "head_mount_kinect_rgb_link" );
-  pnh.param<int>( "deadman_paddle", deadman_paddle_, 0 );
   pnh.param<int>( "deadman_button", deadman_button_, 0 );
 
   point_head_goal_.pointing_axis.x = 1;
@@ -61,21 +60,20 @@ HeadPointer::~HeadPointer()
 {
 }
 
-void HeadPointer::hydraCb( razer_hydra::HydraConstPtr hydra_msg )
+void HeadPointer::joyCb( sensor_msgs::JoyConstPtr joy_msg )
 {
   if ( ros::Time::now() - last_update_time_ < ros::Duration(update_freq_) )
   {
     return;
   }
 
-  if ( hydra_msg->paddles.size() <= deadman_paddle_ &&
-       hydra_msg->paddles.at(deadman_paddle_).buttons.size() <= deadman_button_  )
+  if ( joy_msg->buttons.size() <= deadman_button_  )
   {
-    ROS_ERROR_ONCE("Paddle/Button index for deadman switch is out of bounds!");
+    ROS_ERROR_ONCE("Button index for deadman switch is out of bounds!");
     return;
   }
 
-  if ( hydra_msg->paddles.at(deadman_paddle_).buttons.at(deadman_button_) )
+  if ( joy_msg->buttons.at(deadman_button_) )
   {
     last_update_time_ = ros::Time::now();
     //point_head_goal_.target.header.stamp = ros::Time::now() - ros::Duration(1.0);

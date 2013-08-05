@@ -1,11 +1,14 @@
 <launch>
 
+  <arg name="tracked_frame" default="oculus"/>
+  <arg name="deadman_button" default="10"/>
+  
   <node name="head_pointer" pkg="pr2_surrogate" type="head_pointer" required="true" output="screen">
-    <param name="tracked_frame" value="oculus"/>
+    <param name="tracked_frame" value="$(arg tracked_frame)"/>
     <param name="pointing_frame" value="head_mount_kinect_rgb_link"/>
     <param name="update_freq" value="0.1"/>
-    <param name="deadman_paddle" value="0"/>
-    <param name="deadman_button" value="0"/>
+    <param name="deadman_button" value="$(arg deadman_button)"/>
+    <remap from="joy" to="hydra_joy"/>
   </node>
 
 </launch>

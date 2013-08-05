@@ -3,6 +3,7 @@ project(pr2_surrogate)
 
 find_package(catkin REQUIRED 
   COMPONENTS
+    sensor_msgs
     geometry_msgs
     pr2_controllers_msgs
     actionlib
@@ -29,7 +30,7 @@ target_link_libraries(head_pointer
    ${Boost_LIBRARIES}
 )
 add_dependencies(head_pointer
-  razer_hydra_generate_messages_cpp
+  sensor_msgs_generate_messages_cpp
 )
 
 add_executable(arm_mover
@@ -41,7 +42,7 @@ target_link_libraries(arm_mover
    ${Boost_LIBRARIES}
 )
 add_dependencies(arm_mover
-  razer_hydra_generate_messages_cpp
+  sensor_msgs_generate_messages_cpp
 )
 
 add_executable(terminator_eye

@@ -40,7 +40,7 @@
 
 #include <actionlib/client/simple_action_client.h>
 
-#include <razer_hydra/Hydra.h>
+#include <sensor_msgs/Joy.h>
 
 class HeadPointer
 {
@@ -48,20 +48,19 @@ public:
   HeadPointer( ros::NodeHandle pnh, std::string action_topic );
   virtual ~HeadPointer();
 
-  void hydraCb( razer_hydra::HydraConstPtr hydra_msg );
+  void joyCb( sensor_msgs::JoyConstPtr joy_msg );
 
   typedef actionlib::SimpleActionClient<pr2_controllers_msgs::PointHeadAction> PointHeadActionClient;
   PointHeadActionClient point_head_action_client_;
 
   ros::Time last_update_time_;
   ros::NodeHandle nh_;
-  ros::Subscriber hydra_sub_;
+  ros::Subscriber joy_sub_;
 
   pr2_controllers_msgs::PointHeadGoal point_head_goal_;
 
   double update_freq_;
 
-  int deadman_paddle_;
   int deadman_button_;
 };
 

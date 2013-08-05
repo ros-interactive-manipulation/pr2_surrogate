@@ -36,7 +36,7 @@
 
 #include <ros/ros.h>
 
-#include <razer_hydra/Hydra.h>
+#include <sensor_msgs/Joy.h>
 
 #include <geometry_msgs/PoseStamped.h>
 
@@ -46,18 +46,17 @@ public:
   ArmMover( ros::NodeHandle pnh );
   virtual ~ArmMover();
 
-  void hydraCb( razer_hydra::HydraConstPtr hydra_msg );
+  void joyCb( sensor_msgs::JoyConstPtr joy_msg );
 
   ros::Time last_update_time_;
   ros::NodeHandle nh_;
-  ros::Subscriber hydra_sub_;
+  ros::Subscriber joy_sub_;
 
   ros::Publisher command_pub_;
   geometry_msgs::PoseStamped pose_msg_;
 
   double update_freq_;
 
-  int deadman_paddle_;
   int deadman_button_;
 };
 

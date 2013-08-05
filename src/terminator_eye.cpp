@@ -54,7 +54,7 @@ void TerminatorEye::joyCb( sensor_msgs::JoyConstPtr joy_msg )
 {
   if ( trigger_button_ >= joy_msg->buttons.size() )
   {
-    ROS_ERROR_ONCE("Button index for deadman switch is out of bounds!");
+    ROS_ERROR_ONCE("Button index for projector trigger is out of bounds!");
     return;
   }
 

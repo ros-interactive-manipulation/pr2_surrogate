@@ -2,15 +2,14 @@
 
   <arg name="command_topic"/>
   <arg name="tracked_frame"/>
-  <arg name="deadman_paddle" default="0"/>
-  <arg name="deadman_button" default="0"/>
+  <arg name="deadman_button" default="10"/>
 
   <node name="arm_mover_$(arg tracked_frame)" pkg="pr2_surrogate" type="arm_mover" required="true" output="screen">
     <param name="tracked_frame" value="$(arg tracked_frame)"/>
     <param name="update_freq" value="0.1"/>
-    <param name="deadman_paddle" value="$(arg deadman_paddle)"/>
     <param name="deadman_button" value="$(arg deadman_button)"/>
     <remap from="command" to="$(arg command_topic)"/>
+    <remap from="joy" to="hydra_joy"/>
   </node>
 
 </launch>
