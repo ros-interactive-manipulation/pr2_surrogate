@@ -33,7 +33,7 @@
   <run_depend>actionlib</run_depend>
 
   <run_depend>image_transport_plugins</run_depend>
-  <run_depend>pr2_teleop</run_depend>
+  <run_depend>pr2_apps</run_depend>
   <run_depend>audio_capture</run_depend>
   <run_depend>audio_play</run_depend>
   <run_depend>pr2_controller_manager</run_depend>
