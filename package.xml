@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>pr2_surrogate</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>The pr2_surrogate package allows you to make a PR2
                into a surrogate for your physical body using the Oculus RIFT HMD
                and Razer Hydra controller.</description>
