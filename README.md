@@ -10,9 +10,7 @@ What it does:
 - Track the Hydra motion with the PR2 grippers
 
 Installation:
-- Clone this repo and [rviz_oculus](https://github.com/ros-visualization/rviz_oculus) into a catkin
-- `sudo apt-get install ros-groovy-razer-hydra`
-- call `catkin_make`
+- `sudo apt-get install ros-hydro-pr2-surrogate`
 
 How to run:
 - Connect your Hydra and Oculus Rift
