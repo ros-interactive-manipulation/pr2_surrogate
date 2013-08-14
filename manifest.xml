@@ -1,9 +1,10 @@
 <package>
   <name>pr2_surrogate</name>
   <version>0.1.0</version>
-  <description>The pr2_surrogate package allows you to make a PR2
-               into a surrogate for your physical body using the Oculus RIFT HMD
-               and Razer Hydra controller.</description>
+  <description brief="Fully immersive control of a PR2 robot using the Oculus Rift and Razer Hydra">
+    The pr2_surrogate package allows you to use a PR2
+    as a surrogate for your physical body using the Oculus RIFT
+    virtual reality headset and the Razer Hydra controller.</description>
 
   <author>David Gossow/dgossow@willowgarage.com</author>
 
