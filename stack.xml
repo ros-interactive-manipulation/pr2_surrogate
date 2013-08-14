@@ -14,7 +14,7 @@
   <depend stack="razer_hydra" />
   <depend stack="image_transport_plugins" />
   <depend stack="audio_common" />
-  <depend stack="openni_kinect" />
+  <depend stack="openni_camera" />
   <depend stack="geometry" />
 
   <depend stack="oculus_rviz_plugins" />
