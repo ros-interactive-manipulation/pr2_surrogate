@@ -52,7 +52,7 @@ TerminatorEye::~TerminatorEye()
 
 void TerminatorEye::joyCb( sensor_msgs::JoyConstPtr joy_msg )
 {
-  if ( trigger_button_ >= joy_msg->buttons.size() )
+  if ( (unsigned)trigger_button_ >= joy_msg->buttons.size() )
   {
     ROS_ERROR_ONCE("Button index for projector trigger is out of bounds!");
     return;
@@ -68,7 +68,11 @@ void TerminatorEye::joyCb( sensor_msgs::JoyConstPtr joy_msg )
     std::string dynparam_str =
         "rosrun dynamic_reconfigure dynparam set camera_synchronizer_node projector_mode "
         + projector_mode;
-    system(dynparam_str.c_str());
+    int exit_code = system(dynparam_str.c_str());
+    if ( exit_code != 0 )
+    {
+      ROS_ERROR_STREAM( "Call to dynamic_reconfigure exited with code " << exit_code );
+    }
   }
 
 }
