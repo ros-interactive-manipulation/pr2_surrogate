@@ -1,0 +1,27 @@
+<stack>
+  <description brief="Unary stack containing the pr2_surrogate package."/>
+  <author>David Gossow/dgossow@willowgarage.com</author>
+  <license>BSD</license>
+  <version>0.1.0</version>
+  <url>http://ros.org/wiki/image_common</url>
+  
+  <depend stack="common_msgs" />
+  <depend stack="common_rosdeps" />
+  <depend stack="pluginlib" />
+  <depend stack="ros" />
+  <depend stack="ros_comm" />
+  <depend stack="actionlib" />
+  <depend stack="razer_hydra" />
+  <depend stack="image_transport_plugins" />
+  <depend stack="audio_common" />
+  <depend stack="openni_kinect" />
+  <depend stack="geometry" />
+
+  <depend stack="oculus_rviz_plugins" />
+  <depend stack="visualization" />
+
+  <depend stack="pr2_apps" />
+  <depend stack="pr2_controllers" />
+  <depend stack="pr2_mechanism" />
+
+</stack>

@@ -1,6 +1,6 @@
 <package>
   <name>pr2_surrogate</name>
-  <version>0.0.2</version>
+  <version>0.1.0</version>
   <description>The pr2_surrogate package allows you to make a PR2
                into a surrogate for your physical body using the Oculus RIFT HMD
                and Razer Hydra controller.</description>
@@ -16,7 +16,6 @@
   <depend package="pr2_controllers_msgs"/>
   <depend package="actionlib"/>
   <depend package="roscpp"/>
-  <depend package="actionlib"/>
   <depend package="razer_hydra"/>
   <depend package="compressed_image_transport"/>
   <depend package="compressed_depth_image_transport"/>
