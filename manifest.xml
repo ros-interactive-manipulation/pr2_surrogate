@@ -10,8 +10,6 @@
 
   <license>BSD</license>
 
-  <buildtool_depend>catkin</buildtool_depend>
-
   <depend package="geometry_msgs"/>
   <depend package="sensor_msgs"/>
   <depend package="pr2_controllers_msgs"/>
