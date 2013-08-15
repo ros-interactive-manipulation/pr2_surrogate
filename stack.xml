@@ -21,7 +21,6 @@
   <depend stack="geometry" />
 
   <depend stack="oculus_rviz_plugins" />
-  <depend stack="oculus_sdk" />
   <depend stack="visualization" />
 
   <depend stack="pr2_apps" />

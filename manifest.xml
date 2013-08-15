@@ -22,8 +22,12 @@
   <depend package="pr2_controller_manager"/>
   <depend package="robot_mechanism_controllers"/>
   <depend package="openni_camera"/>
-  <depend package="oculus_rviz_plugins"/>
   <depend package="rviz"/>
   <depend package="tf"/>
+  
+<!--
+  For some reason, this can't be resolved, but the dependency is in stack.xml so we're fine.   
+  <depend package="oculus_rviz_plugins"/>
+ -->
 
 </package>
