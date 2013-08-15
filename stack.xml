@@ -5,7 +5,8 @@
     virtual reality headset and the Razer Hydra controller.</description>
   <author>David Gossow/dgossow@willowgarage.com</author>
   <license>BSD</license>
-  <url>http://ros.org/wiki/image_common</url>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/pr2_surrogate</url>
   
   <depend stack="common_msgs" />
   <depend stack="common_rosdeps" />
