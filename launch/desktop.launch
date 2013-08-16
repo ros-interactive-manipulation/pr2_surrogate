@@ -1,32 +1,32 @@
 <launch>
 
-  <arg name="period" default="0.02" />
   <arg name="start_hydra" default="true" />
-  <arg name="device" default="hydra" />
-  <arg name="radius" default="2.0" />
-  
+  <arg name="rviz_args" value="-d $(find pr2_surrogate)/config/pr2_teleop.rviz" />
+  <arg name="razer_pos" value="1.2 0 0.3" />
+  <arg name="audio" default="false"/>
+
   <include if="$(arg start_hydra)" file="$(find razer_hydra)/launch/hydra.launch">
     <arg name="publish_tf" value="true"/>
     <arg name="polling_ms" value="30"/>
   </include>
 
-  <arg name="command_args" value="-d $(find pr2_surrogate)/config/pr2_teleop.rviz" />
-  
   <node name="$(anon rviz)" pkg="rviz" type="rviz" required="true" 
-        respawn="false" output="screen" args="$(arg command_args)">
+        respawn="false" output="screen" args="$(arg rviz_args)">
   </node>
 
-  <node name="desktop_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
-    <param name="bitrate" value="40"/>
-    <remap from="audio" to="desktop_audio"/>
-  </node>
+  <group if="$(arg audio)">
+    <node name="desktop_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
+      <param name="bitrate" value="40"/>
+      <remap from="audio" to="desktop_audio"/>
+    </node>
+  
+    <node name="pr2_audio_play" pkg="audio_play" type="audio_play" output="screen">
+      <param name="dst" value="alsasink"/>
+      <remap from="audio" to="pr2_audio"/>
+    </node>
+  </group>
 
-  <node name="pr2_audio_play" pkg="audio_play" type="audio_play" output="screen">
-    <param name="dst" value="alsasink"/>
-    <remap from="audio" to="pr2_audio"/>
-  </node>
-
-  <node pkg="tf" type="static_transform_publisher" name="hydra_to_base_link_pub" 
-        args="1.2 0 0.7 0 0 0 1 base_link hydra_base 30"/>
+  <node pkg="tf" type="static_transform_publisher" name="hydra_to_robot_tf_pub" 
+        args="$(arg razer_pos) 0 0 0 1 torso_lift hydra_base 30"/>
  
 </launch>
