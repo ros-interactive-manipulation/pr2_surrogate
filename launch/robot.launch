@@ -1,5 +1,7 @@
 <launch>
 
+  <arg name="audio" default="false"/>
+
   <remap from="joy" to="hydra_joy" />
 
   <include file="$(find pr2_teleop)/teleop_joystick.launch"/>
@@ -25,14 +27,16 @@
     <arg name="deadman_button" default="3"/>
   </include>
 
-  <node name="pr2_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
-    <param name="bitrate" value="40"/>
-    <remap from="audio" to="pr2_audio"/>
-  </node>
-
-  <node name="desktop_audio_play" pkg="audio_play" type="audio_play" output="screen">
-    <param name="dst" value="alsasink"/>
-    <remap from="audio" to="desktop_audio"/>
-  </node>
+  <group if="$(arg audio)">
+    <node name="pr2_audio_capture" pkg="audio_capture" type="audio_capture" output="screen">
+      <param name="bitrate" value="40"/>
+      <remap from="audio" to="pr2_audio"/>
+    </node>
+  
+    <node name="desktop_audio_play" pkg="audio_play" type="audio_play" output="screen">
+      <param name="dst" value="alsasink"/>
+      <remap from="audio" to="desktop_audio"/>
+    </node>
+  </group>
 
 </launch>
