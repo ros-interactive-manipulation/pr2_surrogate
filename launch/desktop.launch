@@ -2,7 +2,7 @@
 
   <arg name="start_hydra" default="true" />
   <arg name="rviz_args" value="-d $(find pr2_surrogate)/config/pr2_teleop.rviz" />
-  <arg name="razer_pos" value="1.2 0 0.3" />
+  <arg name="razer_pos" value="1.2 0 -0.3" />
   <arg name="audio" default="false"/>
 
   <include if="$(arg start_hydra)" file="$(find razer_hydra)/launch/hydra.launch">
@@ -27,6 +27,6 @@
   </group>
 
   <node pkg="tf" type="static_transform_publisher" name="hydra_to_robot_tf_pub" 
-        args="$(arg razer_pos) 0 0 0 1 torso_lift hydra_base 30"/>
+        args="$(arg razer_pos) 0 0 0 1 torso_lift_link hydra_base 30"/>
  
 </launch>
