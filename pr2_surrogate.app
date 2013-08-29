@@ -1,5 +1,5 @@
 display: PR2 Surrogate
-description: Control PR2 using the Oculus RIFT virtual reality headset and the Razer Hydra controllers
+description: Control the PR2 using the Oculus RIFT virtual reality headset and the Razer Hydra controllers
 platform: pr2
 launch: pr2_surrogate/robot.launch
 interface: pr2_surrogate/pr2_surrogate.interface
