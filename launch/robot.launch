@@ -16,13 +16,13 @@
   <include file="$(find pr2_surrogate)/launch/head_pointer.launch"/>
 
   <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
-    <arg name="command_topic" value="l_cart/command_pose"/>
+    <arg name="command_topic" value="l_arm_jt_cartesian_controller/command_pose"/>
     <arg name="tracked_frame" value="hydra_left_pivot"/>
     <arg name="deadman_button" default="0"/>
   </include>
 
   <include file="$(find pr2_surrogate)/launch/arm_mover.launch">
-    <arg name="command_topic" value="r_cart/command_pose"/>
+    <arg name="command_topic" value="r_arm_jt_cartesian_controller/command_pose"/>
     <arg name="tracked_frame" value="hydra_right_pivot"/>
     <arg name="deadman_button" default="3"/>
   </include>

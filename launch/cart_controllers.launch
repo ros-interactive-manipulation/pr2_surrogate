@@ -39,10 +39,10 @@
        pkg="pr2_controller_manager" type="pr2_controller_manager"
        args="stop r_arm_controller" />
        
-  <node name="spawn_l_cart"
+  <node name="spawn_l_arm_jt_cartesian_controller"
        pkg="pr2_controller_manager" type="pr2_controller_manager"
        args="spawn l_arm_cart_controller" />
-  <node name="spawn_r_cart"
+  <node name="spawn_r_arm_jt_cartesian_controller"
        pkg="pr2_controller_manager" type="pr2_controller_manager"
        args="spawn r_arm_cart_controller" />
 
