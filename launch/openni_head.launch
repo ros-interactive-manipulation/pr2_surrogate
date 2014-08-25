@@ -44,9 +44,10 @@
   <!-- Start nodelet manager in top-level namespace -->
   <arg name="manager" value="$(arg camera)_nodelet_manager" />
   <arg name="debug" default="false" /> <!-- Run manager in GDB? -->
-  <include file="$(find openni_launch)/launch/includes/manager.launch">
+  <include file="$(find rgbd_launch)/launch/includes/manager.launch.xml">
     <arg name="name" value="$(arg manager)" />
     <arg name="debug" value="$(arg debug)" />
+    <arg name="num_worker_threads" value="1" />
   </include>
 
   <!-- Push down all topics/nodelets into "camera" namespace -->
@@ -72,7 +73,7 @@
     </include>
 
     <!-- Load standard constellation of processing nodelets -->
-    <include file="$(find openni_launch)/launch/includes/processing.launch">
+    <include file="$(find rgbd_launch)/launch/includes/processing.launch.xml">
       <arg name="manager"               value="/$(arg manager)" /> <!-- Fully resolved -->
       <arg name="rgb"                   value="$(arg rgb)" />
       <arg name="ir"                    value="$(arg ir)" />
